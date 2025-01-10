@@ -1,24 +1,16 @@
 # JR-Granular
 
-This is a real-time granular fx plugin made with JUCE and RNBO C++ export.
+This is a real-time diode-style ring modulation fx plugin made with JUCE and RNBO C++ export, based on example project by Kengo Suzuki.
 
-<img alt="Screenshot 2024-04-03 at 12 39 07" src="https://github.com/szkkng/jr-granular/assets/61953352/9a76f39d-83c8-4ee5-802c-7fac718cf591">
-
-This project is an example of using APVTS (juce::AudioProcessorValueTreeState) to link the exported code with custom
-JUCE UIs,
-so I will not add any new features to this plugin.
-
-## Installing
-
-Visit the [Releases](https://github.com/szkkng/jr-granular/releases/) page.
+[JR-Granular - JUCE & RNBO C++ Export](https://kengo.dev/posts/jr-granular)
 
 ## Building
 
 ```
-$ git clone --recurse-submodules https://github.com/szkkng/jr-granular.git
-$ cd jr-granular
-$ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-$ cmake --build build --config Release
+git clone --recurse-submodules https://github.com/wwerkk/ringmod-rnbo.git
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug
+cmake --build . --config Debug
 ```
 
 ## UI Manual
@@ -29,15 +21,3 @@ $ cmake --build build --config Release
 - undo: [mac] cmd + z, [win] ctrl + z
 - redo: [mac] cmd + shift + z, [win] ctrl + shift + z
 - reset: double click
-
-## Links
-
-- Demo: [JR-Granular - JUCE & RNBO C++ Export](https://twitter.com/kng_dev/status/1587611842272055297?s=20&t=urpfRicQtbKBhkqoNniYBw)
-- Tutorial: [JR-Granular - JUCE & RNBO C++ Export](https://kengo.dev/posts/jr-granular)
-
-## References
-
-- [Programming a Custom UI with JUCE](https://rnbo.cycling74.com/learn/programming-a-custom-ui-with-juce)
-- [RNBO C++ API Reference](https://rnbo.cycling74.com/cpp)
-- [Cycling74/gen-plugin-export](https://github.com/Cycling74/gen-plugin-export)
-
