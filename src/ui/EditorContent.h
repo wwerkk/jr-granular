@@ -15,13 +15,7 @@ public:
     bool keyPressed (const juce::KeyPress& k) override;
 
 private:
-    Dial intvDial;
-    Dial pitchDial;
-    Dial sizeDial;
-    Dial posDial;
-    Dial widthDial;
-    Dial mixDial;
-    Dial gainDial;
+    Dial wetDial;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EditorContent)
 };
