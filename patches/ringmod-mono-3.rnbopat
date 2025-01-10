@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "rnbo",
-		"rect" : [ 34.0, 166.0, 1932.0, 880.0 ],
+		"rect" : [ 594.0, 140.0, 1932.0, 880.0 ],
 		"gridsize" : [ 15.0, 15.0 ],
 		"title" : "ringmod-mono-3",
 		"boxes" : [ 			{
@@ -174,7 +174,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 452.0, 498.0, 205.0, 23.0 ],
+					"patching_rect" : [ 452.0, 498.0, 211.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -193,8 +193,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 1,
-					"rnbo_uniqueid" : "ampMod",
+					"rnbo_serial" : 16,
+					"rnbo_uniqueid" : "ampMod_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -581,8 +581,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param ampMod @enum 0 1 @value 0",
-					"varname" : "ampMod"
+					"text" : "param ampMod_ @enum 0 1 @value 0",
+					"varname" : "ampMod_"
 				}
 
 			}
@@ -593,7 +593,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 28.0, 417.0, 256.0, 23.0 ],
+					"patching_rect" : [ 28.0, 417.0, 261.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -611,8 +611,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 2,
-					"rnbo_uniqueid" : "ampEnv",
+					"rnbo_serial" : 17,
+					"rnbo_uniqueid" : "ampEnv_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -999,8 +999,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param ampEnv @min 0 @max 1000 @value 0.1",
-					"varname" : "ampEnv"
+					"text" : "param ampEnv_ @min 0 @max 1000 @value 0.1",
+					"varname" : "ampEnv_"
 				}
 
 			}
@@ -2292,7 +2292,7 @@
 
 												}
  ],
-											"originid" : "pat-28"
+											"originid" : "pat-134"
 										}
 
 									}
@@ -2306,7 +2306,7 @@
 									"rnbo_classname" : "gen~",
 									"rnbo_extra_attributes" : 									{
 										"exposeparams" : 0,
-										"gencode" : "Param rampsamples(1, min=1);\nHistory history_1(0);\nHistory history_2(0);\nHistory history_3(0);\nout2 = rampsamples;\ngte_4 = history_2 >= rampsamples;\nabs_5 = abs(in1);\ngt_6 = abs_5 > history_1;\nor_7 = gt_6 || gte_4;\nlatch_8 = latch(abs_5, or_7);\ncounter_9, counter_10, counter_11 = counter(1, or_7 + gte_4, 0, init=-1);\nadd_12 = counter_9 + 1;\ndiv_13 = add_12 / rampsamples;\nlatch_14 = latch(history_3, or_7);\nsub_15 = latch_8 - latch_14;\nmul_16 = sub_15 * div_13;\nadd_17 = latch_14 + mul_16;\nout1 = add_17;\nhistory_1_next_18 = fixdenorm(latch_8);\nhistory_2_next_19 = fixdenorm(add_12);\nhistory_3_next_20 = fixdenorm(add_17);\nhistory_1 = history_1_next_18;\nhistory_3 = history_3_next_20;\nhistory_2 = history_2_next_19;",
+										"gencode" : "Param rampsamples(1, min=1);\nHistory history_1(0);\nHistory history_2(0);\nHistory history_3(0);\nout2 = rampsamples;\ngte_4 = history_2 >= rampsamples;\nabs_5 = abs(in1);\ngt_6 = abs_5 > history_1;\nor_7 = gt_6 || gte_4;\nlatch_8 = latch(abs_5, or_7);\ncounter_9, counter_10, counter_11 = counter(1, or_7 + gte_4, 0, init=-1);\nadd_12 = counter_9 + 1;\nlatch_13 = latch(history_3, or_7);\nsub_14 = latch_8 - latch_13;\ndiv_15 = add_12 / rampsamples;\nmul_16 = sub_14 * div_15;\nadd_17 = latch_13 + mul_16;\nout1 = add_17;\nhistory_1_next_18 = fixdenorm(latch_8);\nhistory_2_next_19 = fixdenorm(add_12);\nhistory_3_next_20 = fixdenorm(add_17);\nhistory_1 = history_1_next_18;\nhistory_3 = history_3_next_20;\nhistory_2 = history_2_next_19;",
 										"geninlets" : 1,
 										"genoutlets" : 2
 									}
@@ -2743,7 +2743,7 @@
 
 							}
  ],
-						"originid" : "pat-26",
+						"originid" : "pat-132",
 						"styles" : [ 							{
 								"name" : "rnbo",
 								"default" : 								{
@@ -3129,7 +3129,7 @@
 
 								}
  ],
-							"originid" : "pat-30"
+							"originid" : "pat-136"
 						}
 
 					}
@@ -3348,7 +3348,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 837.0, 83.0, 254.0, 23.0 ],
+					"patching_rect" : [ 837.0, 83.0, 259.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -3366,8 +3366,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 3,
-					"rnbo_uniqueid" : "pitchThresh",
+					"rnbo_serial" : 13,
+					"rnbo_uniqueid" : "pitchThresh_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -3754,8 +3754,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param pitchThresh @min 0 @max 1 @value 0.1",
-					"varname" : "pitchThresh"
+					"text" : "param pitchThresh_ @min 0 @max 1 @value 0.1",
+					"varname" : "pitchThresh_"
 				}
 
 			}
@@ -3766,7 +3766,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 661.0, 423.0, 226.0, 23.0 ],
+					"patching_rect" : [ 661.0, 423.0, 231.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -3785,8 +3785,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 4,
-					"rnbo_uniqueid" : "subharmonic",
+					"rnbo_serial" : 14,
+					"rnbo_uniqueid" : "subharmonic_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -4173,8 +4173,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param subharmonic @enum 0 1 @value 0",
-					"varname" : "subharmonic"
+					"text" : "param subharmonic_ @enum 0 1 @value 0",
+					"varname" : "subharmonic_"
 				}
 
 			}
@@ -4185,7 +4185,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 755.0, 454.0, 214.0, 23.0 ],
+					"patching_rect" : [ 755.0, 454.0, 220.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -4203,8 +4203,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 5,
-					"rnbo_uniqueid" : "ratio",
+					"rnbo_serial" : 15,
+					"rnbo_uniqueid" : "ratio_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -4591,8 +4591,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param ratio @min 1 @max 32 @value 1",
-					"varname" : "ratio"
+					"text" : "param ratio_ @min 1 @max 32 @value 1",
+					"varname" : "ratio_"
 				}
 
 			}
@@ -4603,7 +4603,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 336.0, 83.0, 237.0, 23.0 ],
+					"patching_rect" : [ 336.0, 83.0, 242.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -4621,8 +4621,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 6,
-					"rnbo_uniqueid" : "freq",
+					"rnbo_serial" : 11,
+					"rnbo_uniqueid" : "freq_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -5009,8 +5009,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param freq @min -100 @max 100 @value 1",
-					"varname" : "freq"
+					"text" : "param freq_ @min -100 @max 100 @value 1",
+					"varname" : "freq_"
 				}
 
 			}
@@ -5283,7 +5283,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 664.0, 57.0, 210.0, 23.0 ],
+					"patching_rect" : [ 664.0, 57.0, 215.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -5302,8 +5302,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 7,
-					"rnbo_uniqueid" : "pitchHold",
+					"rnbo_serial" : 12,
+					"rnbo_uniqueid" : "pitchHold_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -5690,8 +5690,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param pitchHold @enum 0 1 @value 0",
-					"varname" : "pitchHold"
+					"text" : "param pitchHold_ @enum 0 1 @value 0",
+					"varname" : "pitchHold_"
 				}
 
 			}
@@ -7070,7 +7070,7 @@
 
 												}
  ],
-											"originid" : "pat-34"
+											"originid" : "pat-140"
 										}
 
 									}
@@ -7084,7 +7084,7 @@
 									"rnbo_classname" : "gen~",
 									"rnbo_extra_attributes" : 									{
 										"exposeparams" : 0,
-										"gencode" : "Param rampsamples(1, min=1);\nHistory history_1(0);\nHistory history_2(0);\nHistory history_3(0);\nout2 = rampsamples;\nabs_4 = abs(in1);\ngt_5 = abs_4 > history_1;\ngte_6 = history_2 >= rampsamples;\nor_7 = gt_5 || gte_6;\nlatch_8 = latch(abs_4, or_7);\nlatch_9 = latch(history_3, or_7);\ncounter_10, counter_11, counter_12 = counter(1, or_7 + gte_6, 0, init=-1);\nadd_13 = counter_10 + 1;\nsub_14 = latch_8 - latch_9;\ndiv_15 = add_13 / rampsamples;\nmul_16 = sub_14 * div_15;\nadd_17 = latch_9 + mul_16;\nout1 = add_17;\nhistory_1_next_18 = fixdenorm(latch_8);\nhistory_2_next_19 = fixdenorm(add_13);\nhistory_3_next_20 = fixdenorm(add_17);\nhistory_1 = history_1_next_18;\nhistory_3 = history_3_next_20;\nhistory_2 = history_2_next_19;",
+										"gencode" : "Param rampsamples(1, min=1);\nHistory history_1(0);\nHistory history_2(0);\nHistory history_3(0);\nout2 = rampsamples;\nabs_4 = abs(in1);\ngt_5 = abs_4 > history_1;\ngte_6 = history_2 >= rampsamples;\nor_7 = gt_5 || gte_6;\nlatch_8 = latch(abs_4, or_7);\nlatch_9 = latch(history_3, or_7);\nsub_10 = latch_8 - latch_9;\ncounter_11, counter_12, counter_13 = counter(1, or_7 + gte_6, 0, init=-1);\nadd_14 = counter_11 + 1;\ndiv_15 = add_14 / rampsamples;\nmul_16 = sub_10 * div_15;\nadd_17 = latch_9 + mul_16;\nout1 = add_17;\nhistory_1_next_18 = fixdenorm(latch_8);\nhistory_2_next_19 = fixdenorm(add_14);\nhistory_3_next_20 = fixdenorm(add_17);\nhistory_1 = history_1_next_18;\nhistory_3 = history_3_next_20;\nhistory_2 = history_2_next_19;",
 										"geninlets" : 1,
 										"genoutlets" : 2
 									}
@@ -7521,7 +7521,7 @@
 
 							}
  ],
-						"originid" : "pat-32",
+						"originid" : "pat-138",
 						"styles" : [ 							{
 								"name" : "rnbo",
 								"default" : 								{
@@ -8059,7 +8059,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 189.0, 57.0, 219.0, 23.0 ],
+					"patching_rect" : [ 189.0, 57.0, 225.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -8078,8 +8078,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 8,
-					"rnbo_uniqueid" : "pitchFollow",
+					"rnbo_serial" : 10,
+					"rnbo_uniqueid" : "pitchFollow_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -8466,8 +8466,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param pitchFollow @enum 0 1 @value 0",
-					"varname" : "pitchFollow"
+					"text" : "param pitchFollow_ @enum 0 1 @value 0",
+					"varname" : "pitchFollow_"
 				}
 
 			}
@@ -8613,7 +8613,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 324.0, 351.0, 250.0, 23.0 ],
+					"patching_rect" : [ 324.0, 351.0, 255.0, 23.0 ],
 					"rnbo_classname" : "param",
 					"rnbo_extra_attributes" : 					{
 						"displayorder" : "-",
@@ -8631,8 +8631,8 @@
 						"preset" : 1
 					}
 ,
-					"rnbo_serial" : 10,
-					"rnbo_uniqueid" : "pitchEnv",
+					"rnbo_serial" : 18,
+					"rnbo_uniqueid" : "pitchEnv_",
 					"rnboinfo" : 					{
 						"needsInstanceInfo" : 1,
 						"argnames" : 						{
@@ -9019,8 +9019,8 @@
 						"changesPatcherIO" : 0
 					}
 ,
-					"text" : "param pitchEnv @min 0 @max 1000 @value 1",
-					"varname" : "pitchEnv"
+					"text" : "param pitchEnv_ @min 0 @max 1000 @value 1",
+					"varname" : "pitchEnv_"
 				}
 
 			}
@@ -9761,7 +9761,7 @@
 
 			}
  ],
-		"originid" : "pat-24"
+		"originid" : "pat-130"
 	}
 
 }
