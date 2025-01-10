@@ -75,29 +75,29 @@ namespace RNBO {
 class rnbomatic : public PatcherInterfaceImpl {
 public:
 
-class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
+class RNBOSubpatcher_40 : public PatcherInterfaceImpl {
     
     friend class rnbomatic;
     
     public:
     
-    class RNBOSubpatcher_2058 : public PatcherInterfaceImpl {
+    class RNBOSubpatcher_36 : public PatcherInterfaceImpl {
             
-            friend class RNBOSubpatcher_2062;
+            friend class RNBOSubpatcher_40;
             friend class rnbomatic;
             
             public:
             
-            RNBOSubpatcher_2058()
+            RNBOSubpatcher_36()
             {
             }
             
-            ~RNBOSubpatcher_2058()
+            ~RNBOSubpatcher_36()
             {
             }
             
-            virtual RNBOSubpatcher_2062* getPatcher() const {
-                return static_cast<RNBOSubpatcher_2062 *>(_parentPatcher);
+            virtual RNBOSubpatcher_40* getPatcher() const {
+                return static_cast<RNBOSubpatcher_40 *>(_parentPatcher);
             }
             
             rnbomatic* getTopLevelPatcher() {
@@ -470,7 +470,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 this->gen_01_history_1_init();
                 this->gen_01_history_2_init();
                 this->gen_01_history_3_init();
-                this->gen_01_counter_9_init();
+                this->gen_01_counter_6_init();
             }
             
             void sendOutlet(OutletIndex index, ParameterValue value) {
@@ -522,41 +522,41 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 Index n
             ) {
                 auto __gen_01_history_3_value = this->gen_01_history_3_value;
-                auto __gen_01_history_2_value = this->gen_01_history_2_value;
                 auto __gen_01_history_1_value = this->gen_01_history_1_value;
+                auto __gen_01_history_2_value = this->gen_01_history_2_value;
                 Index i;
             
                 for (i = 0; i < n; i++) {
                     out2[(Index)i] = rampsamples;
-                    number abs_4_0 = rnbo_abs(in1[(Index)i]);
-                    number gt_5_1 = abs_4_0 > __gen_01_history_1_value;
-                    number gte_6_2 = __gen_01_history_2_value >= rampsamples;
-                    number or_7_3 = (bool)(gt_5_1) || (bool)(gte_6_2);
-                    number latch_8_5 = this->gen_01_latch_4_next(abs_4_0, or_7_3);
-                    number latch_9_7 = this->gen_01_latch_6_next(__gen_01_history_3_value, or_7_3);
-                    number sub_10_8 = latch_8_5 - latch_9_7;
+                    number gte_4_0 = __gen_01_history_2_value >= rampsamples;
+                    number abs_5_1 = rnbo_abs(in1[(Index)i]);
+                    number gt_6_2 = abs_5_1 > __gen_01_history_1_value;
+                    number or_7_3 = (bool)(gt_6_2) || (bool)(gte_4_0);
+                    number latch_8_5 = this->gen_01_latch_4_next(abs_5_1, or_7_3);
+                    number counter_9 = 0;
+                    number counter_10 = 0;
                     number counter_11 = 0;
-                    number counter_12 = 0;
-                    number counter_13 = 0;
-                    array<number, 3> result_10 = this->gen_01_counter_9_next(1, or_7_3 + gte_6_2, 0);
-                    counter_13 = result_10[2];
-                    counter_12 = result_10[1];
-                    counter_11 = result_10[0];
-                    number add_14_11 = counter_11 + 1;
-                    number div_15_12 = (rampsamples == 0. ? 0. : add_14_11 / rampsamples);
-                    number mul_16_13 = sub_10_8 * div_15_12;
-                    number add_17_14 = latch_9_7 + mul_16_13;
+                    array<number, 3> result_7 = this->gen_01_counter_6_next(1, or_7_3 + gte_4_0, 0);
+                    counter_11 = result_7[2];
+                    counter_10 = result_7[1];
+                    counter_9 = result_7[0];
+                    number add_12_8 = counter_9 + 1;
+                    number div_13_9 = (rampsamples == 0. ? 0. : add_12_8 / rampsamples);
+                    number latch_14_11 = this->gen_01_latch_10_next(__gen_01_history_3_value, or_7_3);
+                    number sub_15_12 = latch_8_5 - latch_14_11;
+                    number mul_16_13 = sub_15_12 * div_13_9;
+                    number add_17_14 = latch_14_11 + mul_16_13;
                     out1[(Index)i] = add_17_14;
                     number history_1_next_18_15 = fixdenorm(latch_8_5);
-                    number history_2_next_19_16 = fixdenorm(add_14_11);
+                    number history_2_next_19_16 = fixdenorm(add_12_8);
                     number history_3_next_20_17 = fixdenorm(add_17_14);
                     __gen_01_history_1_value = history_1_next_18_15;
                     __gen_01_history_3_value = history_3_next_20_17;
                     __gen_01_history_2_value = history_2_next_19_16;
                 }
             
-                this->gen_01_history_1_value = __gen_01_history_1_value;
                 this->gen_01_history_2_value = __gen_01_history_2_value;
+                this->gen_01_history_1_value = __gen_01_history_1_value;
                 this->gen_01_history_3_value = __gen_01_history_3_value;
             }
             
@@ -630,43 +630,43 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 this->gen_01_latch_4_value = 0;
             }
             
-            number gen_01_latch_6_next(number x, number control) {
-                if (control != 0.)
-                    this->gen_01_latch_6_value = x;
-            
-                return this->gen_01_latch_6_value;
-            }
-            
-            void gen_01_latch_6_dspsetup() {
-                this->gen_01_latch_6_reset();
-            }
-            
-            void gen_01_latch_6_reset() {
-                this->gen_01_latch_6_value = 0;
-            }
-            
-            array<number, 3> gen_01_counter_9_next(number a, number reset, number limit) {
+            array<number, 3> gen_01_counter_6_next(number a, number reset, number limit) {
                 RNBO_UNUSED(limit);
                 RNBO_UNUSED(a);
                 number carry_flag = 0;
             
                 if (reset != 0) {
-                    this->gen_01_counter_9_count = 0;
-                    this->gen_01_counter_9_carry = 0;
+                    this->gen_01_counter_6_count = 0;
+                    this->gen_01_counter_6_carry = 0;
                 } else {
-                    this->gen_01_counter_9_count += 1;
+                    this->gen_01_counter_6_count += 1;
                 }
             
-                return {this->gen_01_counter_9_count, carry_flag, this->gen_01_counter_9_carry};
+                return {this->gen_01_counter_6_count, carry_flag, this->gen_01_counter_6_carry};
             }
             
-            void gen_01_counter_9_init() {
-                this->gen_01_counter_9_count = -1;
+            void gen_01_counter_6_init() {
+                this->gen_01_counter_6_count = -1;
             }
             
-            void gen_01_counter_9_reset() {
-                this->gen_01_counter_9_carry = 0;
-                this->gen_01_counter_9_count = 0;
+            void gen_01_counter_6_reset() {
+                this->gen_01_counter_6_carry = 0;
+                this->gen_01_counter_6_count = 0;
+            }
+            
+            number gen_01_latch_10_next(number x, number control) {
+                if (control != 0.)
+                    this->gen_01_latch_10_value = x;
+            
+                return this->gen_01_latch_10_value;
+            }
+            
+            void gen_01_latch_10_dspsetup() {
+                this->gen_01_latch_10_reset();
+            }
+            
+            void gen_01_latch_10_reset() {
+                this->gen_01_latch_10_value = 0;
             }
             
             void gen_01_dspsetup(bool force) {
@@ -675,7 +675,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             
                 this->gen_01_setupDone = true;
                 this->gen_01_latch_4_dspsetup();
-                this->gen_01_latch_6_dspsetup();
+                this->gen_01_latch_10_dspsetup();
             }
             
             void param_01_getPresetValue(PatcherStateInterface& preset) {
@@ -732,9 +732,9 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 gen_01_history_2_value = 0;
                 gen_01_history_3_value = 0;
                 gen_01_latch_4_value = 0;
-                gen_01_latch_6_value = 0;
-                gen_01_counter_9_carry = 0;
-                gen_01_counter_9_count = 0;
+                gen_01_counter_6_carry = 0;
+                gen_01_counter_6_count = 0;
+                gen_01_latch_10_value = 0;
                 gen_01_setupDone = false;
                 intnum_01_stored = 0;
                 param_01_lastValue = 0;
@@ -766,9 +766,9 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 number gen_01_history_2_value;
                 number gen_01_history_3_value;
                 number gen_01_latch_4_value;
-                number gen_01_latch_6_value;
-                int gen_01_counter_9_carry;
-                number gen_01_counter_9_count;
+                int gen_01_counter_6_carry;
+                number gen_01_counter_6_count;
+                number gen_01_latch_10_value;
                 bool gen_01_setupDone;
                 number intnum_01_stored;
                 number param_01_lastValue;
@@ -780,23 +780,23 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             
     };
     
-    class RNBOSubpatcher_2059 : public PatcherInterfaceImpl {
+    class RNBOSubpatcher_37 : public PatcherInterfaceImpl {
             
-            friend class RNBOSubpatcher_2062;
+            friend class RNBOSubpatcher_40;
             friend class rnbomatic;
             
             public:
             
-            RNBOSubpatcher_2059()
+            RNBOSubpatcher_37()
             {
             }
             
-            ~RNBOSubpatcher_2059()
+            ~RNBOSubpatcher_37()
             {
             }
             
-            virtual RNBOSubpatcher_2062* getPatcher() const {
-                return static_cast<RNBOSubpatcher_2062 *>(_parentPatcher);
+            virtual RNBOSubpatcher_40* getPatcher() const {
+                return static_cast<RNBOSubpatcher_40 *>(_parentPatcher);
             }
             
             rnbomatic* getTopLevelPatcher() {
@@ -1169,7 +1169,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 this->gen_02_history_1_init();
                 this->gen_02_history_2_init();
                 this->gen_02_history_3_init();
-                this->gen_02_counter_9_init();
+                this->gen_02_counter_6_init();
             }
             
             void sendOutlet(OutletIndex index, ParameterValue value) {
@@ -1221,41 +1221,41 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 Index n
             ) {
                 auto __gen_02_history_3_value = this->gen_02_history_3_value;
-                auto __gen_02_history_2_value = this->gen_02_history_2_value;
                 auto __gen_02_history_1_value = this->gen_02_history_1_value;
+                auto __gen_02_history_2_value = this->gen_02_history_2_value;
                 Index i;
             
                 for (i = 0; i < n; i++) {
                     out2[(Index)i] = rampsamples;
-                    number abs_4_0 = rnbo_abs(in1[(Index)i]);
-                    number gt_5_1 = abs_4_0 > __gen_02_history_1_value;
-                    number gte_6_2 = __gen_02_history_2_value >= rampsamples;
-                    number or_7_3 = (bool)(gt_5_1) || (bool)(gte_6_2);
-                    number latch_8_5 = this->gen_02_latch_4_next(abs_4_0, or_7_3);
-                    number latch_9_7 = this->gen_02_latch_6_next(__gen_02_history_3_value, or_7_3);
-                    number sub_10_8 = latch_8_5 - latch_9_7;
+                    number gte_4_0 = __gen_02_history_2_value >= rampsamples;
+                    number abs_5_1 = rnbo_abs(in1[(Index)i]);
+                    number gt_6_2 = abs_5_1 > __gen_02_history_1_value;
+                    number or_7_3 = (bool)(gt_6_2) || (bool)(gte_4_0);
+                    number latch_8_5 = this->gen_02_latch_4_next(abs_5_1, or_7_3);
+                    number counter_9 = 0;
+                    number counter_10 = 0;
                     number counter_11 = 0;
-                    number counter_12 = 0;
-                    number counter_13 = 0;
-                    array<number, 3> result_10 = this->gen_02_counter_9_next(1, or_7_3 + gte_6_2, 0);
-                    counter_13 = result_10[2];
-                    counter_12 = result_10[1];
-                    counter_11 = result_10[0];
-                    number add_14_11 = counter_11 + 1;
-                    number div_15_12 = (rampsamples == 0. ? 0. : add_14_11 / rampsamples);
-                    number mul_16_13 = sub_10_8 * div_15_12;
-                    number add_17_14 = latch_9_7 + mul_16_13;
+                    array<number, 3> result_7 = this->gen_02_counter_6_next(1, or_7_3 + gte_4_0, 0);
+                    counter_11 = result_7[2];
+                    counter_10 = result_7[1];
+                    counter_9 = result_7[0];
+                    number add_12_8 = counter_9 + 1;
+                    number div_13_9 = (rampsamples == 0. ? 0. : add_12_8 / rampsamples);
+                    number latch_14_11 = this->gen_02_latch_10_next(__gen_02_history_3_value, or_7_3);
+                    number sub_15_12 = latch_8_5 - latch_14_11;
+                    number mul_16_13 = sub_15_12 * div_13_9;
+                    number add_17_14 = latch_14_11 + mul_16_13;
                     out1[(Index)i] = add_17_14;
                     number history_1_next_18_15 = fixdenorm(latch_8_5);
-                    number history_2_next_19_16 = fixdenorm(add_14_11);
+                    number history_2_next_19_16 = fixdenorm(add_12_8);
                     number history_3_next_20_17 = fixdenorm(add_17_14);
                     __gen_02_history_1_value = history_1_next_18_15;
                     __gen_02_history_3_value = history_3_next_20_17;
                     __gen_02_history_2_value = history_2_next_19_16;
                 }
             
-                this->gen_02_history_1_value = __gen_02_history_1_value;
                 this->gen_02_history_2_value = __gen_02_history_2_value;
+                this->gen_02_history_1_value = __gen_02_history_1_value;
                 this->gen_02_history_3_value = __gen_02_history_3_value;
             }
             
@@ -1329,43 +1329,43 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 this->gen_02_latch_4_value = 0;
             }
             
-            number gen_02_latch_6_next(number x, number control) {
-                if (control != 0.)
-                    this->gen_02_latch_6_value = x;
-            
-                return this->gen_02_latch_6_value;
-            }
-            
-            void gen_02_latch_6_dspsetup() {
-                this->gen_02_latch_6_reset();
-            }
-            
-            void gen_02_latch_6_reset() {
-                this->gen_02_latch_6_value = 0;
-            }
-            
-            array<number, 3> gen_02_counter_9_next(number a, number reset, number limit) {
+            array<number, 3> gen_02_counter_6_next(number a, number reset, number limit) {
                 RNBO_UNUSED(limit);
                 RNBO_UNUSED(a);
                 number carry_flag = 0;
             
                 if (reset != 0) {
-                    this->gen_02_counter_9_count = 0;
-                    this->gen_02_counter_9_carry = 0;
+                    this->gen_02_counter_6_count = 0;
+                    this->gen_02_counter_6_carry = 0;
                 } else {
-                    this->gen_02_counter_9_count += 1;
+                    this->gen_02_counter_6_count += 1;
                 }
             
-                return {this->gen_02_counter_9_count, carry_flag, this->gen_02_counter_9_carry};
+                return {this->gen_02_counter_6_count, carry_flag, this->gen_02_counter_6_carry};
             }
             
-            void gen_02_counter_9_init() {
-                this->gen_02_counter_9_count = -1;
+            void gen_02_counter_6_init() {
+                this->gen_02_counter_6_count = -1;
             }
             
-            void gen_02_counter_9_reset() {
-                this->gen_02_counter_9_carry = 0;
-                this->gen_02_counter_9_count = 0;
+            void gen_02_counter_6_reset() {
+                this->gen_02_counter_6_carry = 0;
+                this->gen_02_counter_6_count = 0;
+            }
+            
+            number gen_02_latch_10_next(number x, number control) {
+                if (control != 0.)
+                    this->gen_02_latch_10_value = x;
+            
+                return this->gen_02_latch_10_value;
+            }
+            
+            void gen_02_latch_10_dspsetup() {
+                this->gen_02_latch_10_reset();
+            }
+            
+            void gen_02_latch_10_reset() {
+                this->gen_02_latch_10_value = 0;
             }
             
             void gen_02_dspsetup(bool force) {
@@ -1374,7 +1374,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             
                 this->gen_02_setupDone = true;
                 this->gen_02_latch_4_dspsetup();
-                this->gen_02_latch_6_dspsetup();
+                this->gen_02_latch_10_dspsetup();
             }
             
             void param_02_getPresetValue(PatcherStateInterface& preset) {
@@ -1431,9 +1431,9 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 gen_02_history_2_value = 0;
                 gen_02_history_3_value = 0;
                 gen_02_latch_4_value = 0;
-                gen_02_latch_6_value = 0;
-                gen_02_counter_9_carry = 0;
-                gen_02_counter_9_count = 0;
+                gen_02_counter_6_carry = 0;
+                gen_02_counter_6_count = 0;
+                gen_02_latch_10_value = 0;
                 gen_02_setupDone = false;
                 intnum_02_stored = 0;
                 param_02_lastValue = 0;
@@ -1465,9 +1465,9 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
                 number gen_02_history_2_value;
                 number gen_02_history_3_value;
                 number gen_02_latch_4_value;
-                number gen_02_latch_6_value;
-                int gen_02_counter_9_carry;
-                number gen_02_counter_9_count;
+                int gen_02_counter_6_carry;
+                number gen_02_counter_6_count;
+                number gen_02_latch_10_value;
                 bool gen_02_setupDone;
                 number intnum_02_stored;
                 number param_02_lastValue;
@@ -1479,11 +1479,11 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             
     };
     
-    RNBOSubpatcher_2062()
+    RNBOSubpatcher_40()
     {
     }
     
-    ~RNBOSubpatcher_2062()
+    ~RNBOSubpatcher_40()
     {
         delete this->p_01;
         delete this->p_02;
@@ -1684,11 +1684,11 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
     void getState(PatcherStateInterface& ) {}
     
     void setState() {
-        this->p_01 = new RNBOSubpatcher_2058();
+        this->p_01 = new RNBOSubpatcher_36();
         this->p_01->setEngineAndPatcher(this->getEngine(), this);
         this->p_01->initialize();
         this->p_01->setParameterOffset(this->getParameterOffset(this->p_01));
-        this->p_02 = new RNBOSubpatcher_2059();
+        this->p_02 = new RNBOSubpatcher_37();
         this->p_02->setEngineAndPatcher(this->getEngine(), this);
         this->p_02->initialize();
         this->p_02->setParameterOffset(this->getParameterOffset(this->p_02));
@@ -1697,7 +1697,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
     void getPreset(PatcherStateInterface& preset) {
         this->param_03_getPresetValue(getSubState(preset, "ampEnv"));
         this->param_04_getPresetValue(getSubState(preset, "pitchFollow"));
-        this->param_05_getPresetValue(getSubState(preset, "pitchGlide"));
+        this->param_05_getPresetValue(getSubState(preset, "pitchEnv"));
         this->param_06_getPresetValue(getSubState(preset, "freq"));
         this->param_07_getPresetValue(getSubState(preset, "ampMod"));
         this->param_08_getPresetValue(getSubState(preset, "subharmonic"));
@@ -1865,7 +1865,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             }
         case 2:
             {
-            return "pitchGlide";
+            return "pitchEnv";
             }
         case 3:
             {
@@ -1920,7 +1920,7 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
             }
         case 2:
             {
-            return "p_obj-3/pitchGlide";
+            return "p_obj-3/pitchEnv";
             }
         case 3:
             {
@@ -4355,34 +4355,34 @@ class RNBOSubpatcher_2062 : public PatcherInterfaceImpl {
         Int _noteNumber;
         Index isMuted;
         ParameterIndex parameterOffset;
-        RNBOSubpatcher_2058* p_01;
-        RNBOSubpatcher_2059* p_02;
+        RNBOSubpatcher_36* p_01;
+        RNBOSubpatcher_37* p_02;
     
 };
 
-class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
+class RNBOSubpatcher_41 : public PatcherInterfaceImpl {
     
     friend class rnbomatic;
     
     public:
     
-    class RNBOSubpatcher_2060 : public PatcherInterfaceImpl {
+    class RNBOSubpatcher_38 : public PatcherInterfaceImpl {
             
-            friend class RNBOSubpatcher_2063;
+            friend class RNBOSubpatcher_41;
             friend class rnbomatic;
             
             public:
             
-            RNBOSubpatcher_2060()
+            RNBOSubpatcher_38()
             {
             }
             
-            ~RNBOSubpatcher_2060()
+            ~RNBOSubpatcher_38()
             {
             }
             
-            virtual RNBOSubpatcher_2063* getPatcher() const {
-                return static_cast<RNBOSubpatcher_2063 *>(_parentPatcher);
+            virtual RNBOSubpatcher_41* getPatcher() const {
+                return static_cast<RNBOSubpatcher_41 *>(_parentPatcher);
             }
             
             rnbomatic* getTopLevelPatcher() {
@@ -4755,7 +4755,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 this->gen_04_history_1_init();
                 this->gen_04_history_2_init();
                 this->gen_04_history_3_init();
-                this->gen_04_counter_9_init();
+                this->gen_04_counter_6_init();
             }
             
             void sendOutlet(OutletIndex index, ParameterValue value) {
@@ -4818,22 +4818,22 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                     number gt_6_2 = abs_5_1 > __gen_04_history_1_value;
                     number or_7_3 = (bool)(gt_6_2) || (bool)(gte_4_0);
                     number latch_8_5 = this->gen_04_latch_4_next(abs_5_1, or_7_3);
-                    number latch_9_7 = this->gen_04_latch_6_next(__gen_04_history_3_value, or_7_3);
-                    number sub_10_8 = latch_8_5 - latch_9_7;
+                    number counter_9 = 0;
+                    number counter_10 = 0;
                     number counter_11 = 0;
-                    number counter_12 = 0;
-                    number counter_13 = 0;
-                    array<number, 3> result_10 = this->gen_04_counter_9_next(1, or_7_3 + gte_4_0, 0);
-                    counter_13 = result_10[2];
-                    counter_12 = result_10[1];
-                    counter_11 = result_10[0];
-                    number add_14_11 = counter_11 + 1;
-                    number div_15_12 = (rampsamples == 0. ? 0. : add_14_11 / rampsamples);
-                    number mul_16_13 = sub_10_8 * div_15_12;
-                    number add_17_14 = latch_9_7 + mul_16_13;
+                    array<number, 3> result_7 = this->gen_04_counter_6_next(1, or_7_3 + gte_4_0, 0);
+                    counter_11 = result_7[2];
+                    counter_10 = result_7[1];
+                    counter_9 = result_7[0];
+                    number add_12_8 = counter_9 + 1;
+                    number latch_13_10 = this->gen_04_latch_9_next(__gen_04_history_3_value, or_7_3);
+                    number sub_14_11 = latch_8_5 - latch_13_10;
+                    number div_15_12 = (rampsamples == 0. ? 0. : add_12_8 / rampsamples);
+                    number mul_16_13 = sub_14_11 * div_15_12;
+                    number add_17_14 = latch_13_10 + mul_16_13;
                     out1[(Index)i] = add_17_14;
                     number history_1_next_18_15 = fixdenorm(latch_8_5);
-                    number history_2_next_19_16 = fixdenorm(add_14_11);
+                    number history_2_next_19_16 = fixdenorm(add_12_8);
                     number history_3_next_20_17 = fixdenorm(add_17_14);
                     __gen_04_history_1_value = history_1_next_18_15;
                     __gen_04_history_3_value = history_3_next_20_17;
@@ -4915,43 +4915,43 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 this->gen_04_latch_4_value = 0;
             }
             
-            number gen_04_latch_6_next(number x, number control) {
-                if (control != 0.)
-                    this->gen_04_latch_6_value = x;
-            
-                return this->gen_04_latch_6_value;
-            }
-            
-            void gen_04_latch_6_dspsetup() {
-                this->gen_04_latch_6_reset();
-            }
-            
-            void gen_04_latch_6_reset() {
-                this->gen_04_latch_6_value = 0;
-            }
-            
-            array<number, 3> gen_04_counter_9_next(number a, number reset, number limit) {
+            array<number, 3> gen_04_counter_6_next(number a, number reset, number limit) {
                 RNBO_UNUSED(limit);
                 RNBO_UNUSED(a);
                 number carry_flag = 0;
             
                 if (reset != 0) {
-                    this->gen_04_counter_9_count = 0;
-                    this->gen_04_counter_9_carry = 0;
+                    this->gen_04_counter_6_count = 0;
+                    this->gen_04_counter_6_carry = 0;
                 } else {
-                    this->gen_04_counter_9_count += 1;
+                    this->gen_04_counter_6_count += 1;
                 }
             
-                return {this->gen_04_counter_9_count, carry_flag, this->gen_04_counter_9_carry};
+                return {this->gen_04_counter_6_count, carry_flag, this->gen_04_counter_6_carry};
             }
             
-            void gen_04_counter_9_init() {
-                this->gen_04_counter_9_count = -1;
+            void gen_04_counter_6_init() {
+                this->gen_04_counter_6_count = -1;
             }
             
-            void gen_04_counter_9_reset() {
-                this->gen_04_counter_9_carry = 0;
-                this->gen_04_counter_9_count = 0;
+            void gen_04_counter_6_reset() {
+                this->gen_04_counter_6_carry = 0;
+                this->gen_04_counter_6_count = 0;
+            }
+            
+            number gen_04_latch_9_next(number x, number control) {
+                if (control != 0.)
+                    this->gen_04_latch_9_value = x;
+            
+                return this->gen_04_latch_9_value;
+            }
+            
+            void gen_04_latch_9_dspsetup() {
+                this->gen_04_latch_9_reset();
+            }
+            
+            void gen_04_latch_9_reset() {
+                this->gen_04_latch_9_value = 0;
             }
             
             void gen_04_dspsetup(bool force) {
@@ -4960,7 +4960,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             
                 this->gen_04_setupDone = true;
                 this->gen_04_latch_4_dspsetup();
-                this->gen_04_latch_6_dspsetup();
+                this->gen_04_latch_9_dspsetup();
             }
             
             void param_12_getPresetValue(PatcherStateInterface& preset) {
@@ -5017,9 +5017,9 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 gen_04_history_2_value = 0;
                 gen_04_history_3_value = 0;
                 gen_04_latch_4_value = 0;
-                gen_04_latch_6_value = 0;
-                gen_04_counter_9_carry = 0;
-                gen_04_counter_9_count = 0;
+                gen_04_counter_6_carry = 0;
+                gen_04_counter_6_count = 0;
+                gen_04_latch_9_value = 0;
                 gen_04_setupDone = false;
                 intnum_03_stored = 0;
                 param_12_lastValue = 0;
@@ -5051,9 +5051,9 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 number gen_04_history_2_value;
                 number gen_04_history_3_value;
                 number gen_04_latch_4_value;
-                number gen_04_latch_6_value;
-                int gen_04_counter_9_carry;
-                number gen_04_counter_9_count;
+                int gen_04_counter_6_carry;
+                number gen_04_counter_6_count;
+                number gen_04_latch_9_value;
                 bool gen_04_setupDone;
                 number intnum_03_stored;
                 number param_12_lastValue;
@@ -5065,23 +5065,23 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             
     };
     
-    class RNBOSubpatcher_2061 : public PatcherInterfaceImpl {
+    class RNBOSubpatcher_39 : public PatcherInterfaceImpl {
             
-            friend class RNBOSubpatcher_2063;
+            friend class RNBOSubpatcher_41;
             friend class rnbomatic;
             
             public:
             
-            RNBOSubpatcher_2061()
+            RNBOSubpatcher_39()
             {
             }
             
-            ~RNBOSubpatcher_2061()
+            ~RNBOSubpatcher_39()
             {
             }
             
-            virtual RNBOSubpatcher_2063* getPatcher() const {
-                return static_cast<RNBOSubpatcher_2063 *>(_parentPatcher);
+            virtual RNBOSubpatcher_41* getPatcher() const {
+                return static_cast<RNBOSubpatcher_41 *>(_parentPatcher);
             }
             
             rnbomatic* getTopLevelPatcher() {
@@ -5454,7 +5454,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 this->gen_05_history_1_init();
                 this->gen_05_history_2_init();
                 this->gen_05_history_3_init();
-                this->gen_05_counter_6_init();
+                this->gen_05_counter_9_init();
             }
             
             void sendOutlet(OutletIndex index, ParameterValue value) {
@@ -5506,41 +5506,41 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 Index n
             ) {
                 auto __gen_05_history_3_value = this->gen_05_history_3_value;
-                auto __gen_05_history_1_value = this->gen_05_history_1_value;
                 auto __gen_05_history_2_value = this->gen_05_history_2_value;
+                auto __gen_05_history_1_value = this->gen_05_history_1_value;
                 Index i;
             
                 for (i = 0; i < n; i++) {
                     out2[(Index)i] = rampsamples;
-                    number gte_4_0 = __gen_05_history_2_value >= rampsamples;
-                    number abs_5_1 = rnbo_abs(in1[(Index)i]);
-                    number gt_6_2 = abs_5_1 > __gen_05_history_1_value;
-                    number or_7_3 = (bool)(gt_6_2) || (bool)(gte_4_0);
-                    number latch_8_5 = this->gen_05_latch_4_next(abs_5_1, or_7_3);
-                    number counter_9 = 0;
-                    number counter_10 = 0;
+                    number abs_4_0 = rnbo_abs(in1[(Index)i]);
+                    number gt_5_1 = abs_4_0 > __gen_05_history_1_value;
+                    number gte_6_2 = __gen_05_history_2_value >= rampsamples;
+                    number or_7_3 = (bool)(gt_5_1) || (bool)(gte_6_2);
+                    number latch_8_5 = this->gen_05_latch_4_next(abs_4_0, or_7_3);
+                    number latch_9_7 = this->gen_05_latch_6_next(__gen_05_history_3_value, or_7_3);
+                    number sub_10_8 = latch_8_5 - latch_9_7;
                     number counter_11 = 0;
-                    array<number, 3> result_7 = this->gen_05_counter_6_next(1, or_7_3 + gte_4_0, 0);
-                    counter_11 = result_7[2];
-                    counter_10 = result_7[1];
-                    counter_9 = result_7[0];
-                    number add_12_8 = counter_9 + 1;
-                    number div_13_9 = (rampsamples == 0. ? 0. : add_12_8 / rampsamples);
-                    number latch_14_11 = this->gen_05_latch_10_next(__gen_05_history_3_value, or_7_3);
-                    number sub_15_12 = latch_8_5 - latch_14_11;
-                    number mul_16_13 = sub_15_12 * div_13_9;
-                    number add_17_14 = latch_14_11 + mul_16_13;
+                    number counter_12 = 0;
+                    number counter_13 = 0;
+                    array<number, 3> result_10 = this->gen_05_counter_9_next(1, or_7_3 + gte_6_2, 0);
+                    counter_13 = result_10[2];
+                    counter_12 = result_10[1];
+                    counter_11 = result_10[0];
+                    number add_14_11 = counter_11 + 1;
+                    number div_15_12 = (rampsamples == 0. ? 0. : add_14_11 / rampsamples);
+                    number mul_16_13 = sub_10_8 * div_15_12;
+                    number add_17_14 = latch_9_7 + mul_16_13;
                     out1[(Index)i] = add_17_14;
                     number history_1_next_18_15 = fixdenorm(latch_8_5);
-                    number history_2_next_19_16 = fixdenorm(add_12_8);
+                    number history_2_next_19_16 = fixdenorm(add_14_11);
                     number history_3_next_20_17 = fixdenorm(add_17_14);
                     __gen_05_history_1_value = history_1_next_18_15;
                     __gen_05_history_3_value = history_3_next_20_17;
                     __gen_05_history_2_value = history_2_next_19_16;
                 }
             
-                this->gen_05_history_2_value = __gen_05_history_2_value;
                 this->gen_05_history_1_value = __gen_05_history_1_value;
+                this->gen_05_history_2_value = __gen_05_history_2_value;
                 this->gen_05_history_3_value = __gen_05_history_3_value;
             }
             
@@ -5614,43 +5614,43 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 this->gen_05_latch_4_value = 0;
             }
             
-            array<number, 3> gen_05_counter_6_next(number a, number reset, number limit) {
+            number gen_05_latch_6_next(number x, number control) {
+                if (control != 0.)
+                    this->gen_05_latch_6_value = x;
+            
+                return this->gen_05_latch_6_value;
+            }
+            
+            void gen_05_latch_6_dspsetup() {
+                this->gen_05_latch_6_reset();
+            }
+            
+            void gen_05_latch_6_reset() {
+                this->gen_05_latch_6_value = 0;
+            }
+            
+            array<number, 3> gen_05_counter_9_next(number a, number reset, number limit) {
                 RNBO_UNUSED(limit);
                 RNBO_UNUSED(a);
                 number carry_flag = 0;
             
                 if (reset != 0) {
-                    this->gen_05_counter_6_count = 0;
-                    this->gen_05_counter_6_carry = 0;
+                    this->gen_05_counter_9_count = 0;
+                    this->gen_05_counter_9_carry = 0;
                 } else {
-                    this->gen_05_counter_6_count += 1;
+                    this->gen_05_counter_9_count += 1;
                 }
             
-                return {this->gen_05_counter_6_count, carry_flag, this->gen_05_counter_6_carry};
+                return {this->gen_05_counter_9_count, carry_flag, this->gen_05_counter_9_carry};
             }
             
-            void gen_05_counter_6_init() {
-                this->gen_05_counter_6_count = -1;
+            void gen_05_counter_9_init() {
+                this->gen_05_counter_9_count = -1;
             }
             
-            void gen_05_counter_6_reset() {
-                this->gen_05_counter_6_carry = 0;
-                this->gen_05_counter_6_count = 0;
-            }
-            
-            number gen_05_latch_10_next(number x, number control) {
-                if (control != 0.)
-                    this->gen_05_latch_10_value = x;
-            
-                return this->gen_05_latch_10_value;
-            }
-            
-            void gen_05_latch_10_dspsetup() {
-                this->gen_05_latch_10_reset();
-            }
-            
-            void gen_05_latch_10_reset() {
-                this->gen_05_latch_10_value = 0;
+            void gen_05_counter_9_reset() {
+                this->gen_05_counter_9_carry = 0;
+                this->gen_05_counter_9_count = 0;
             }
             
             void gen_05_dspsetup(bool force) {
@@ -5659,7 +5659,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             
                 this->gen_05_setupDone = true;
                 this->gen_05_latch_4_dspsetup();
-                this->gen_05_latch_10_dspsetup();
+                this->gen_05_latch_6_dspsetup();
             }
             
             void param_13_getPresetValue(PatcherStateInterface& preset) {
@@ -5716,9 +5716,9 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 gen_05_history_2_value = 0;
                 gen_05_history_3_value = 0;
                 gen_05_latch_4_value = 0;
-                gen_05_counter_6_carry = 0;
-                gen_05_counter_6_count = 0;
-                gen_05_latch_10_value = 0;
+                gen_05_latch_6_value = 0;
+                gen_05_counter_9_carry = 0;
+                gen_05_counter_9_count = 0;
                 gen_05_setupDone = false;
                 intnum_04_stored = 0;
                 param_13_lastValue = 0;
@@ -5750,9 +5750,9 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
                 number gen_05_history_2_value;
                 number gen_05_history_3_value;
                 number gen_05_latch_4_value;
-                int gen_05_counter_6_carry;
-                number gen_05_counter_6_count;
-                number gen_05_latch_10_value;
+                number gen_05_latch_6_value;
+                int gen_05_counter_9_carry;
+                number gen_05_counter_9_count;
                 bool gen_05_setupDone;
                 number intnum_04_stored;
                 number param_13_lastValue;
@@ -5764,11 +5764,11 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             
     };
     
-    RNBOSubpatcher_2063()
+    RNBOSubpatcher_41()
     {
     }
     
-    ~RNBOSubpatcher_2063()
+    ~RNBOSubpatcher_41()
     {
         delete this->p_03;
         delete this->p_04;
@@ -5969,11 +5969,11 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
     void getState(PatcherStateInterface& ) {}
     
     void setState() {
-        this->p_03 = new RNBOSubpatcher_2060();
+        this->p_03 = new RNBOSubpatcher_38();
         this->p_03->setEngineAndPatcher(this->getEngine(), this);
         this->p_03->initialize();
         this->p_03->setParameterOffset(this->getParameterOffset(this->p_03));
-        this->p_04 = new RNBOSubpatcher_2061();
+        this->p_04 = new RNBOSubpatcher_39();
         this->p_04->setEngineAndPatcher(this->getEngine(), this);
         this->p_04->initialize();
         this->p_04->setParameterOffset(this->getParameterOffset(this->p_04));
@@ -5982,7 +5982,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
     void getPreset(PatcherStateInterface& preset) {
         this->param_14_getPresetValue(getSubState(preset, "ampEnv"));
         this->param_15_getPresetValue(getSubState(preset, "pitchFollow"));
-        this->param_16_getPresetValue(getSubState(preset, "pitchGlide"));
+        this->param_16_getPresetValue(getSubState(preset, "pitchEnv"));
         this->param_17_getPresetValue(getSubState(preset, "freq"));
         this->param_18_getPresetValue(getSubState(preset, "ampMod"));
         this->param_19_getPresetValue(getSubState(preset, "subharmonic"));
@@ -6150,7 +6150,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             }
         case 2:
             {
-            return "pitchGlide";
+            return "pitchEnv";
             }
         case 3:
             {
@@ -6205,7 +6205,7 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
             }
         case 2:
             {
-            return "p_obj-8/pitchGlide";
+            return "p_obj-8/pitchEnv";
             }
         case 3:
             {
@@ -8640,8 +8640,8 @@ class RNBOSubpatcher_2063 : public PatcherInterfaceImpl {
         Int _noteNumber;
         Index isMuted;
         ParameterIndex parameterOffset;
-        RNBOSubpatcher_2060* p_03;
-        RNBOSubpatcher_2061* p_04;
+        RNBOSubpatcher_38* p_03;
+        RNBOSubpatcher_39* p_04;
     
 };
 
@@ -8959,11 +8959,11 @@ Index getPatcherSerial() const {
 void getState(PatcherStateInterface& ) {}
 
 void setState() {
-    this->p_05 = new RNBOSubpatcher_2062();
+    this->p_05 = new RNBOSubpatcher_40();
     this->p_05->setEngineAndPatcher(this->getEngine(), this);
     this->p_05->initialize();
     this->p_05->setParameterOffset(this->getParameterOffset(this->p_05));
-    this->p_06 = new RNBOSubpatcher_2063();
+    this->p_06 = new RNBOSubpatcher_41();
     this->p_06->setEngineAndPatcher(this->getEngine(), this);
     this->p_06->initialize();
     this->p_06->setParameterOffset(this->getParameterOffset(this->p_06));
@@ -9009,7 +9009,7 @@ void setPreset(MillisecondTime time, PatcherStateInterface& preset) {
     );
 
     this->p_05->param_05_setPresetValue(
-        getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-3"), "pitchGlide")
+        getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-3"), "pitchEnv")
     );
 
     this->p_05->param_06_setPresetValue(getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-3"), "freq"));
@@ -9049,7 +9049,7 @@ void setPreset(MillisecondTime time, PatcherStateInterface& preset) {
     );
 
     this->p_06->param_16_setPresetValue(
-        getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-8"), "pitchGlide")
+        getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-8"), "pitchEnv")
     );
 
     this->p_06->param_17_setPresetValue(getSubState(getSubState(getSubState(preset, "__sps"), "p_obj-8"), "freq"));
@@ -10051,6 +10051,9 @@ void param_30_value_set(number v) {
         this->getEngine()->presetTouched();
         this->param_30_lastValue = this->param_30_value;
     }
+
+    this->p_05_pitchEnv_set(v);
+    this->p_06_pitchEnv_set(v);
 }
 
 void param_31_value_set(number v) {
@@ -10325,6 +10328,18 @@ void p_06_pitchThresh_set(number v) {
 number param_30_value_constrain(number v) const {
     v = (v > 1000 ? 1000 : (v < 0 ? 0 : v));
     return v;
+}
+
+void p_05_pitchEnv_set(number v) {
+    {
+        this->p_05->setParameterValue(2, v, this->_currentTime);
+    }
+}
+
+void p_06_pitchEnv_set(number v) {
+    {
+        this->p_06->setParameterValue(2, v, this->_currentTime);
+    }
 }
 
 number param_31_value_constrain(number v) const {
@@ -11427,8 +11442,8 @@ void assign_defaults()
     Index isMuted;
     indexlist paramInitIndices;
     indexlist paramInitOrder;
-    RNBOSubpatcher_2062* p_05;
-    RNBOSubpatcher_2063* p_06;
+    RNBOSubpatcher_40* p_05;
+    RNBOSubpatcher_41* p_06;
 
 };
 

@@ -278,8 +278,8 @@
     {
       "type": "ParameterTypeNumber",
       "index": 13,
-      "name": "pitchGlide",
-      "paramId": "p_obj-3/pitchGlide",
+      "name": "pitchEnv",
+      "paramId": "p_obj-3/pitchEnv",
       "minimum": 0,
       "maximum": 1000,
       "exponent": 1,
@@ -510,8 +510,8 @@
     {
       "type": "ParameterTypeNumber",
       "index": 24,
-      "name": "pitchGlide",
-      "paramId": "p_obj-8/pitchGlide",
+      "name": "pitchEnv",
+      "paramId": "p_obj-8/pitchEnv",
       "minimum": 0,
       "maximum": 1000,
       "exponent": 1,
