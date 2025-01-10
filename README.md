@@ -1,6 +1,7 @@
 # RingMod-RNBO
 
-This is a real-time diode-style ring modulation fx plugin made with JUCE and RNBO C++ export, based on example project by Kengo Suzuki.
+This is a real-time ring modulation fx plugin made with JUCE and RNBO C++ export, based on example project by Kengo Suzuki.
+So far, features include a simple pitch follower and a diode-style ring modulation implemented in gen~.
 
 [JR-Granular - JUCE & RNBO C++ Export](https://kengo.dev/posts/jr-granular)
 
