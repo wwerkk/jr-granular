@@ -1,11 +1,11 @@
 
 
 #include "PluginProcessor.h"
-#include "RNBO_Types.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_core/juce_core.h"
 #include "ParamIDs.h"
 #include "PluginEditor.h"
+#include "RNBO_Types.h"
 
 static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 {
@@ -69,10 +69,12 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         return juce::String { std::round (value) } + unit;
     };
 
-    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::wet, 1 },
-                                                             param_ids::wet,
-                                                             juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
-                                                             0.5f));
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::wet, 1 },
+        param_ids::wet,
+        juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
+        0.5f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
 
     // layout.add (std::make_unique<juce::AudioParameterFloat> (
     //     juce::ParameterID { param_ids::width, 1 },
@@ -116,7 +118,6 @@ PluginProcessor::PluginProcessor()
         if (info.visible)
         {
             auto paramID = juce::String (rnboObject.getParameterId (i));
-            std::cout << paramID << std::endl;
             // Each apvts parameter id and range must be the same as the rnbo param object's.
             // If you hit this assertion then you need to fix the incorrect id in param_ids.h.
             jassert (apvts.getParameter (paramID) != nullptr);
