@@ -1,4 +1,4 @@
-# JR-Granular
+# RingMod-RNBO
 
 This is a real-time diode-style ring modulation fx plugin made with JUCE and RNBO C++ export, based on example project by Kengo Suzuki.
 
