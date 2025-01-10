@@ -1,13 +1,13 @@
 target_include_directories(
-    jr-granular
+    rm-pretty
     PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/rnbo"
         "${CMAKE_CURRENT_SOURCE_DIR}/rnbo/common"
 )
 
 target_sources(
-    jr-granular
+    rm-pretty
     PRIVATE
-        rnbo_granular.cpp
+        ringmod-stereo-3.cpp
         rnbo/RNBO.cpp
 )

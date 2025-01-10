@@ -1,43 +1,24 @@
-# ==============================================================================
-#
-#  Copyright 2022 Suzuki Kengo
-#
-#  JR-Granular is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  JR-Granular is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with JR-Granular. If not, see <http://www.gnu.org/licenses/>.
-#
-# ==============================================================================
-
 cmake_minimum_required(VERSION 3.25)
-project(jr-granular VERSION 1.0.4)
+project(rm-pretty VERSION 0.0.2)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
+set(CMAKE_OSX_ARCHITECTURES "arm64")
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13")
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
-set(PRODUCT_NAME "JR-Granular")
+set(PRODUCT_NAME "RingMod")
 set(TARGET_NAME "${PROJECT_NAME}")
 
 add_subdirectory(lib/JUCE)
 
 juce_add_plugin(${TARGET_NAME}
-    COMPANY_NAME "Kengo"
-    COMPANY_WEBSITE "https://kengo.dev"
-    COMPANY_EMAIL "hi@kengo.dev"
-    BUNDLE_ID "dev.kengo.${PROJECT_NAME}"
-    PLUGIN_MANUFACTURER_CODE "Kngo"
-    PLUGIN_CODE "Jrgr"
+    COMPANY_NAME "wwerkk"
+    COMPANY_WEBSITE "https://wwerkk.notion.site"
+    COMPANY_EMAIL "wwerkowicz@gmail.com"
+    BUNDLE_ID "wwerkk.${PROJECT_NAME}"
+    PLUGIN_MANUFACTURER_CODE "WWRK"
+    PLUGIN_CODE "RM02"
     FORMATS Standalone VST3 AU
     COPY_PLUGIN_AFTER_BUILD TRUE
     PRODUCT_NAME "${PRODUCT_NAME}"

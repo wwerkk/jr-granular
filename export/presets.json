@@ -1,53 +1,123 @@
 [
   {
-    "name": "untitled",
+    "name": "rnbo",
     "preset": {
-      "gain": {
+      "__sps": {
+        "p_obj-3": {
+          "__sps": {
+            "env.follower": {
+              "rampsamples": {
+                "value": 48
+              }
+            },
+            "env.follower[1]": {
+              "rampsamples": {
+                "value": 1
+              }
+            }
+          },
+          "ampEnv": {
+            "value": 0
+          },
+          "ampMod": {
+            "value": 0
+          },
+          "freq": {
+            "value": 1
+          },
+          "pitchFollow": {
+            "value": 1
+          },
+          "pitchGlide": {
+            "value": 1
+          },
+          "pitchHold": {
+            "value": 0
+          },
+          "pitchThresh": {
+            "value": 0.61
+          },
+          "ratio": {
+            "value": 1
+          },
+          "subharmonic": {
+            "value": 0
+          }
+        },
+        "p_obj-8": {
+          "__sps": {
+            "env.follower": {
+              "rampsamples": {
+                "value": 48
+              }
+            },
+            "env.follower[1]": {
+              "rampsamples": {
+                "value": 1
+              }
+            }
+          },
+          "ampEnv": {
+            "value": 0
+          },
+          "ampMod": {
+            "value": 0
+          },
+          "freq": {
+            "value": 81.30000000000001
+          },
+          "pitchFollow": {
+            "value": 1
+          },
+          "pitchGlide": {
+            "value": 1
+          },
+          "pitchHold": {
+            "value": 0
+          },
+          "pitchThresh": {
+            "value": 0.61
+          },
+          "ratio": {
+            "value": 1
+          },
+          "subharmonic": {
+            "value": 0
+          }
+        }
+      },
+      "ampEnv": {
         "value": 0
       },
-      "grainPos": {
-        "value": 100
-      },
-      "grainSize": {
-        "value": 100
-      },
-      "interval": {
-        "value": 100
-      },
-      "mix": {
-        "value": 50
-      },
-      "pitch": {
+      "ampMod": {
         "value": 0
       },
-      "width": {
-        "value": 50
-      }
-    }
-  },
-  {
-    "name": "untitled",
-    "preset": {
-      "gain": {
+      "feedback": {
         "value": 0
       },
-      "grainPos": {
+      "freq": {
         "value": 100
       },
-      "grainSize": {
-        "value": 100
+      "pitchEnv": {
+        "value": 424
       },
-      "interval": {
-        "value": 100
+      "pitchFollow": {
+        "value": 1
       },
-      "mix": {
-        "value": 0.5
-      },
-      "pitch": {
+      "pitchHold": {
         "value": 0
       },
-      "width": {
-        "value": 0.5
+      "pitchThresh": {
+        "value": 0.61
+      },
+      "ratio": {
+        "value": 1
+      },
+      "subharmonic": {
+        "value": 0
+      },
+      "wet": {
+        "value": 1
       }
     }
   }
