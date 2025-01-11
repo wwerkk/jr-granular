@@ -8,6 +8,9 @@ EditorContent::EditorContent (juce::AudioProcessorValueTreeState& apvts, juce::U
     , freqDial (*apvts.getParameter (param_ids::freq), &um)
     , ratioDial (*apvts.getParameter (param_ids::ratio), &um)
     , ampEnvDial (*apvts.getParameter (param_ids::ampEnv), &um)
+    , feedbackDial (*apvts.getParameter (param_ids::feedback), &um)
+    , pitchThreshDial (*apvts.getParameter (param_ids::pitchThresh), &um)
+    , pitchEnvDial (*apvts.getParameter (param_ids::pitchEnv), &um)
 {
     setWantsKeyboardFocus (true);
     setFocusContainerType (FocusContainerType::keyboardFocusContainer);
@@ -25,6 +28,15 @@ EditorContent::EditorContent (juce::AudioProcessorValueTreeState& apvts, juce::U
     ampEnvDial.setInterval (5.0f);
     ampEnvDial.setFineInterval (1.0f);
     addAndMakeVisible (ampEnvDial);
+    feedbackDial.setInterval (5.0f);
+    feedbackDial.setFineInterval (1.0f);
+    addAndMakeVisible (feedbackDial);
+    pitchThreshDial.setInterval (5.0f);
+    pitchThreshDial.setFineInterval (1.0f);
+    addAndMakeVisible (pitchThreshDial);
+    pitchEnvDial.setInterval (5.0f);
+    pitchEnvDial.setFineInterval (1.0f);
+    addAndMakeVisible (pitchEnvDial);
 }
 
 void EditorContent::resized()
@@ -35,10 +47,10 @@ void EditorContent::resized()
     ratioDial.setBounds (topDialBounds.withX (230));
     ampEnvDial.setBounds (topDialBounds.withX (330));
 
-    // const auto bottomDialBounds = topDialBounds.withY (155);
-    // widthDial.setBounds (bottomDialBounds.withX (80));
-    // someDial.setBounds (bottomDialBounds.withX (180));
-    // gainDial.setBounds (bottomDialBounds.withX (280));
+    const auto bottomDialBounds = topDialBounds.withY (155);
+    feedbackDial.setBounds (bottomDialBounds.withX (80));
+    pitchThreshDial.setBounds (bottomDialBounds.withX (180));
+    pitchEnvDial.setBounds (bottomDialBounds.withX (280));
 }
 
 bool EditorContent::keyPressed (const juce::KeyPress& k)
