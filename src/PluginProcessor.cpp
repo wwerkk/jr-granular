@@ -30,6 +30,23 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         0.5f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
 
+    // Format the number to always display three digits like "10.0 Hz", "100 Hz".
+    const auto Hz = [] (auto value, auto)
+    {
+        constexpr auto unit = " Hz";
+
+        if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
+            return juce::String { v, 1 } + unit;
+
+        return juce::String { std::round (value) } + unit;
+    };
+
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::freq, 1 },
+        "Freq",
+        juce::NormalisableRange { -100.0f, 100.0f, 0.01f, 1.0f },
+        100.0f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (Hz)));
     // // Format the number to always display three digits like "10.0 ms", "100 ms".
     // const auto ms = [] (auto value, auto)
     // {
