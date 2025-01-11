@@ -25,7 +25,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
 
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::wet, 1 },
-        param_ids::wet,
+        "Wet",
         juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
         0.5f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
