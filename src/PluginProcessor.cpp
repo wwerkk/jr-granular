@@ -60,73 +60,54 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
                                                              return juce::String { value, 1 } + unit;
                                                          })));
 
-    // // Format the number to always display three digits like "10.0 ms", "100 ms".
-    // const auto ms = [] (auto value, auto)
-    // {
-    //     constexpr auto unit = " ms";
+    layout.add (
+        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::subharmonic, 1 }, "Sub", false));
 
-    //     if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
-    //         return juce::String { v, 1 } + unit;
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::feedback, 1 },
+        "Fb",
+        juce::NormalisableRange { 0.0f, 0.999f, 0.01f, 1.0f },
+        0.5f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
 
-    //     return juce::String { std::round (value) } + unit;
-    // };
+    layout.add (
+        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::pitchHold, 1 }, "Hold", false));
 
-    // layout.add (std::make_unique<juce::AudioParameterFloat> (
-    //     juce::ParameterID { param_ids::interval, 1 },
-    //     "intv",
-    //     juce::NormalisableRange { 10.0f, 500.0f, 0.01f, 0.405f },
-    //     100.0f,
-    //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
+    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::pitchThresh, 1 },
+                                                             "Thresh",
+                                                             juce::NormalisableRange { 0.f, 1.f, 0.01f, 0.405f },
+                                                             0.1f));
 
-    // layout.add (
-    //     std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::pitch, 1 },
-    //                                                  param_ids::pitch,
-    //                                                  juce::NormalisableRange { -12.0f, 12.0f, 0.1f, 1.0f },
-    //                                                  0.0f,
-    //                                                  juce::AudioParameterFloatAttributes().withStringFromValueFunction (
-    //                                                      [] (auto value, auto)
-    //                                                      {
-    //                                                          constexpr auto unit = " st";
-    //                                                          return juce::String { value, 1 } + unit;
-    //                                                      })));
+    // Format the number to always display three digits like "10.0 ms", "100 ms".
+    const auto ms = [] (auto value, auto)
+    {
+        constexpr auto unit = " ms";
 
-    // layout.add (std::make_unique<juce::AudioParameterFloat> (
-    //     juce::ParameterID { param_ids::grainPos, 1 },
-    //     "pos",
-    //     juce::NormalisableRange { 10.0f, 500.0f, 1.0f, 0.405f },
-    //     100.0f,
-    //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
+        if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
+            return juce::String { v, 1 } + unit;
 
-    // layout.add (std::make_unique<juce::AudioParameterFloat> (
-    //     juce::ParameterID { param_ids::grainSize, 1 },
-    //     "size",
-    //     juce::NormalisableRange { 10.0f, 500.0f, 0.01f, 0.405f },
-    //     100.0f,
-    //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
+        return juce::String { std::round (value) } + unit;
+    };
 
-    // layout.add (std::make_unique<juce::AudioParameterFloat> (
-    //     juce::ParameterID { param_ids::width, 1 },
-    //     param_ids::width,
-    //     juce::NormalisableRange { 0.0f, 100.0f, 0.01f, 1.0f },
-    //     50.0,
-    //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::pitchEnv, 1 },
+        param_ids::pitchEnv,
+        juce::NormalisableRange { 0.f, 1000.0f, 0.01f, 0.405f },
+        1.f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
 
-    // layout.add (std::make_unique<juce::AudioParameterFloat> (
-    //     juce::ParameterID { param_ids::gain, 1 },
-    //     "vol",
-    //     juce::NormalisableRange { -36.0f, 12.0f, 0.1f, 2.4f },
-    //     0.0f,
-    //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (
-    //         [] (auto value, auto)
-    //         {
-    //             // Format the number to always display two digits like "0.1 dB", "10 dB".
-    //             constexpr auto unit = " dB";
+    layout.add (
+        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::pitchFollow, 1 }, "Follow", false));
 
-    //             if (auto v { std::round (value * 10.0f) / 10.0f }; -10.0f < v && v < 10.0f)
-    //                 return juce::String { v, 1 } + unit;
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::ampEnv, 1 },
+        param_ids::ampEnv,
+        juce::NormalisableRange { 0.f, 1000.0f, 0.01f, 0.405f },
+        0.1f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
 
-    //             return juce::String { std::round (value) } + unit;
-    //         })));
+    layout.add (
+        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::ampMod, 1 }, "Unipolar", false));
 
     return layout;
 }
@@ -138,7 +119,7 @@ PluginProcessor::PluginProcessor()
     , apvts (*this, &undoManager, "Parameters", createParameterLayout())
 {
     // for (RNBO::ParameterIndex i = 0; i < rnboObject.getNumParameters(); ++i)
-    for (RNBO::ParameterIndex i = 0; i < 3; ++i)
+    for (RNBO::ParameterIndex i = 0; i < 11; ++i) // only retrieve first 11 exposed parameters from the main patch
     {
         RNBO::ParameterInfo info;
         rnboObject.getParameterInfo (i, &info);
@@ -146,6 +127,7 @@ PluginProcessor::PluginProcessor()
         if (info.visible)
         {
             auto paramID = juce::String (rnboObject.getParameterId (i));
+            std::cout << paramID << std::endl;
             // Each apvts parameter id and range must be the same as the rnbo param object's.
             // If you hit this assertion then you need to fix the incorrect id in param_ids.h.
             jassert (apvts.getParameter (paramID) != nullptr);
