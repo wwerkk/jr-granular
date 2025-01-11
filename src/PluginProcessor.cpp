@@ -50,7 +50,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
 
     layout.add (
         std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::ratio, 1 },
-                                                     param_ids::ratio,
+                                                     "Ratio",
                                                      juce::NormalisableRange { 1.0f, 32.0f, 0.1f, 1.0f },
                                                      0.0f,
                                                      juce::AudioParameterFloatAttributes().withStringFromValueFunction (
