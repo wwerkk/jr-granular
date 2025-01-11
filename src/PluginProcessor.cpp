@@ -6,47 +6,25 @@
 #include "ParamIDs.h"
 #include "PluginEditor.h"
 #include "RNBO_Types.h"
+#include "Units.h"
 
 static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-
-    // Format the number to always display three digits like "0.01 %", "10.0 %", "100 %".
-    const auto percentage = [] (auto value, auto)
-    {
-        constexpr auto unit = " %";
-        auto v { value * 100.f };
-        if (v < 10.0f)
-            return juce::String { v, 2 } + unit;
-        if (v < 100.0f)
-            return juce::String { v, 1 } + unit;
-        return juce::String { v } + unit;
-    };
 
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::wet, 1 },
         "Wet",
         juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
         0.5f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
-
-    // Format the number to always display three digits like "10.0 Hz", "100 Hz".
-    const auto Hz = [] (auto value, auto)
-    {
-        constexpr auto unit = " Hz";
-
-        if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
-            return juce::String { v, 1 } + unit;
-
-        return juce::String { std::round (value) } + unit;
-    };
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::percentage)));
 
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::freq, 1 },
         "Freq",
         juce::NormalisableRange { -100.0f, 100.0f, 0.01f, 1.0f },
         100.0f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (Hz)));
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::Hz)));
 
     layout.add (
         std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::ratio, 1 },
@@ -68,7 +46,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         "Fb",
         juce::NormalisableRange { 0.0f, 0.999f, 0.01f, 1.0f },
         0.5f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::percentage)));
 
     layout.add (
         std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::pitchHold, 1 }, "Hold", false));
@@ -78,23 +56,12 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
                                                              juce::NormalisableRange { 0.f, 1.f, 0.01f, 0.405f },
                                                              0.1f));
 
-    // Format the number to always display three digits like "10.0 ms", "100 ms".
-    const auto ms = [] (auto value, auto)
-    {
-        constexpr auto unit = " ms";
-
-        if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
-            return juce::String { v, 1 } + unit;
-
-        return juce::String { std::round (value) } + unit;
-    };
-
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::pitchEnv, 1 },
         param_ids::pitchEnv,
         juce::NormalisableRange { 0.f, 1000.0f, 0.01f, 0.405f },
         1.f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::ms)));
 
     layout.add (
         std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::pitchFollow, 1 }, "Follow", false));
@@ -104,7 +71,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         param_ids::ampEnv,
         juce::NormalisableRange { 0.f, 1000.0f, 0.01f, 0.405f },
         0.1f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::ms)));
 
     layout.add (
         std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::ampMod, 1 }, "Unipolar", false));
