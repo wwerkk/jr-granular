@@ -3,8 +3,7 @@
 
 namespace units
 {
-// Format the numbers to always display three digits
-inline constexpr auto percentage = [] (auto value, auto)
+auto percentage = [] (auto value, auto)
 {
     constexpr auto unit = " %";
     auto v { value * 100.f };
@@ -15,7 +14,7 @@ inline constexpr auto percentage = [] (auto value, auto)
     return juce::String { v } + unit;
 };
 
-inline constexpr auto Hz = [] (auto value, auto)
+auto Hz = [] (auto value, auto)
 {
     constexpr auto unit = " Hz";
 
@@ -25,7 +24,7 @@ inline constexpr auto Hz = [] (auto value, auto)
     return juce::String { std::round (value) } + unit;
 };
 
-inline constexpr auto ms = [] (auto value, auto)
+auto ms = [] (auto value, auto)
 {
     constexpr auto unit = " ms";
 
