@@ -11,6 +11,25 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
 
+    // Format the number to always display three digits like "0.01 %", "10.0 %", "100 %".
+    const auto percentage = [] (auto value, auto)
+    {
+        constexpr auto unit = " %";
+        auto v { value * 100.f };
+        if (v < 10.0f)
+            return juce::String { v, 2 } + unit;
+        if (v < 100.0f)
+            return juce::String { v, 1 } + unit;
+        return juce::String { v } + unit;
+    };
+
+    layout.add (std::make_unique<juce::AudioParameterFloat> (
+        juce::ParameterID { param_ids::wet, 1 },
+        param_ids::wet,
+        juce::NormalisableRange { 0.0f, 1.0f, 1e-3f, 1.0f },
+        0.5f,
+        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
+
     // // Format the number to always display three digits like "10.0 ms", "100 ms".
     // const auto ms = [] (auto value, auto)
     // {
@@ -54,25 +73,6 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
     //     juce::NormalisableRange { 10.0f, 500.0f, 0.01f, 0.405f },
     //     100.0f,
     //     juce::AudioParameterFloatAttributes().withStringFromValueFunction (ms)));
-
-    // Format the number to always display three digits like "0.01 %", "10.0 %", "100 %".
-    const auto percentage = [] (auto value, auto)
-    {
-        constexpr auto unit = " %";
-        auto v { value * 100.f };
-        if (v < 10.0f)
-            return juce::String { v, 2 } + unit;
-        if (v < 100.0f)
-            return juce::String { v, 1 } + unit;
-        return juce::String { v } + unit;
-    };
-
-    layout.add (std::make_unique<juce::AudioParameterFloat> (
-        juce::ParameterID { param_ids::wet, 1 },
-        param_ids::wet,
-        juce::NormalisableRange { 0.0f, 1.0f, 1e-3f, 1.0f },
-        0.5f,
-        juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
 
     // layout.add (std::make_unique<juce::AudioParameterFloat> (
     //     juce::ParameterID { param_ids::width, 1 },
