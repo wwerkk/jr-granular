@@ -15,7 +15,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::wet, 1 },
         "Wet",
-        juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
+        juce::NormalisableRange { 0.0f, 1.0f, 0.001f, 1.0f },
         0.5f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::percentage)));
 
@@ -29,13 +29,13 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
     layout.add (
         std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::ratio, 1 },
                                                      "Ratio",
-                                                     juce::NormalisableRange { 1.0f, 32.0f, 0.1f, 1.0f },
+                                                     juce::NormalisableRange { 1.0f, 32.0f, 0.01f, 1.0f },
                                                      0.0f,
                                                      juce::AudioParameterFloatAttributes().withStringFromValueFunction (
                                                          [] (auto value, auto)
                                                          {
                                                              constexpr auto unit = " x";
-                                                             return juce::String { value, 1 } + unit;
+                                                             return juce::String { value, 2 } + unit;
                                                          })));
 
     layout.add (
@@ -44,7 +44,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::feedback, 1 },
         "Fb",
-        juce::NormalisableRange { 0.0f, 0.999f, 0.01f, 1.0f },
+        juce::NormalisableRange { 0.0f, 0.999f, 0.001f, 1.0f },
         0.5f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::percentage)));
 
