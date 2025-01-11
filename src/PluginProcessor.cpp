@@ -74,7 +74,7 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (units::ms)));
 
     layout.add (
-        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::ampMod, 1 }, "Unipolar", false));
+        std::make_unique<juce::AudioParameterBool> (juce::ParameterID { param_ids::ampMod, 1 }, "AM", false));
 
     return layout;
 }
