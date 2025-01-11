@@ -59,20 +59,18 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
     const auto percentage = [] (auto value, auto)
     {
         constexpr auto unit = " %";
-
-        if (auto v { std::round (value * 100.0f) / 100.0f }; v < 10.0f)
+        auto v { value * 100.f };
+        if (v < 10.0f)
             return juce::String { v, 2 } + unit;
-
-        if (auto v { std::round (value * 10.0f) / 10.0f }; v < 100.0f)
+        if (v < 100.0f)
             return juce::String { v, 1 } + unit;
-
-        return juce::String { std::round (value) } + unit;
+        return juce::String { v } + unit;
     };
 
     layout.add (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { param_ids::wet, 1 },
         param_ids::wet,
-        juce::NormalisableRange { 0.0f, 1.0f, 0.01f, 1.0f },
+        juce::NormalisableRange { 0.0f, 1.0f, 1e-3f, 1.0f },
         0.5f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (percentage)));
 
