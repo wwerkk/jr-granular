@@ -125,7 +125,7 @@ PluginProcessor::PluginProcessor()
     , apvts (*this, &undoManager, "Parameters", createParameterLayout())
 {
     // for (RNBO::ParameterIndex i = 0; i < rnboObject.getNumParameters(); ++i)
-    RNBO::ParameterIndex i = 0;
+    for (RNBO::ParameterIndex i = 0; i < 2; ++i)
     {
         RNBO::ParameterInfo info;
         rnboObject.getParameterInfo (i, &info);
