@@ -47,6 +47,19 @@ static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout
         juce::NormalisableRange { -100.0f, 100.0f, 0.01f, 1.0f },
         100.0f,
         juce::AudioParameterFloatAttributes().withStringFromValueFunction (Hz)));
+
+    layout.add (
+        std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { param_ids::ratio, 1 },
+                                                     param_ids::ratio,
+                                                     juce::NormalisableRange { 1.0f, 32.0f, 0.1f, 1.0f },
+                                                     0.0f,
+                                                     juce::AudioParameterFloatAttributes().withStringFromValueFunction (
+                                                         [] (auto value, auto)
+                                                         {
+                                                             constexpr auto unit = " x";
+                                                             return juce::String { value, 1 } + unit;
+                                                         })));
+
     // // Format the number to always display three digits like "10.0 ms", "100 ms".
     // const auto ms = [] (auto value, auto)
     // {
@@ -125,7 +138,7 @@ PluginProcessor::PluginProcessor()
     , apvts (*this, &undoManager, "Parameters", createParameterLayout())
 {
     // for (RNBO::ParameterIndex i = 0; i < rnboObject.getNumParameters(); ++i)
-    for (RNBO::ParameterIndex i = 0; i < 2; ++i)
+    for (RNBO::ParameterIndex i = 0; i < 3; ++i)
     {
         RNBO::ParameterInfo info;
         rnboObject.getParameterInfo (i, &info);

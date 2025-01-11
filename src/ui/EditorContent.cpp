@@ -6,6 +6,7 @@
 EditorContent::EditorContent (juce::AudioProcessorValueTreeState& apvts, juce::UndoManager& um)
     : wetDial (*apvts.getParameter (param_ids::wet), &um)
     , freqDial (*apvts.getParameter (param_ids::freq), &um)
+    , ratioDial (*apvts.getParameter (param_ids::ratio), &um)
 {
     setWantsKeyboardFocus (true);
     setFocusContainerType (FocusContainerType::keyboardFocusContainer);
@@ -17,6 +18,9 @@ EditorContent::EditorContent (juce::AudioProcessorValueTreeState& apvts, juce::U
     freqDial.setInterval (5.0f);
     freqDial.setFineInterval (1.0f);
     addAndMakeVisible (freqDial);
+    ratioDial.setInterval (5.0f);
+    ratioDial.setFineInterval (1.0f);
+    addAndMakeVisible (ratioDial);
 }
 
 void EditorContent::resized()
@@ -24,7 +28,7 @@ void EditorContent::resized()
     const auto topDialBounds = juce::Rectangle { 0, 30, 80, 95 };
     wetDial.setBounds (topDialBounds.withX (30));
     freqDial.setBounds (topDialBounds.withX (130));
-    // sizeDial.setBounds (topDialBounds.withX (230));
+    ratioDial.setBounds (topDialBounds.withX (230));
     // posDial.setBounds (topDialBounds.withX (330));
 
     // const auto bottomDialBounds = topDialBounds.withY (155);
